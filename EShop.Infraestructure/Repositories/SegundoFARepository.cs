@@ -1,4 +1,5 @@
-﻿using EShop.Application.Interfaces.Repositories;
+﻿using EShop.Application.Helpers;
+using EShop.Application.Interfaces.Repositories;
 using EShop.Domain.Entities;
 using EShop.Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace EShop.Infraestructure.Repositories
 
         public async Task<bool> ActualizarAsync(SegundoFAEntity segundoFAEntity)
         {
-            segundoFAEntity.FechaActualizacion = DateTime.Now;
+            segundoFAEntity.FechaActualizacion = FechaHelper.ActualUTC();
 
             _eShopDbContext.SegundosFA.Entry(segundoFAEntity).State = EntityState.Modified;
             var result = await _eShopDbContext.SaveChangesAsync();

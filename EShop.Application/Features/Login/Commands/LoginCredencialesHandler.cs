@@ -1,5 +1,6 @@
 ﻿using EShop.Application.Common;
 using EShop.Application.Dtos;
+using EShop.Application.Helpers;
 using EShop.Application.Interfaces.Repositories;
 using EShop.Application.Interfaces.Security;
 using EShop.Application.Settings;
@@ -37,7 +38,7 @@ namespace EShop.Application.Features.Login.Commands
                     var sesionActual = await _sesionRepository.BuscarPorIdUsuarioAsync(usuarioEntity.IdUsuario);
                     if(sesionActual is null || sesionActual?.Activo == 0)
                     {
-                        var expiration = DateTime.UtcNow.AddMinutes(_jwtSettings.VigenciaEnMinutos);
+                        var expiration = FechaHelper.ActualUTC(_jwtSettings.VigenciaEnMinutos);
                         var jti = Guid.NewGuid().ToString();
                         var jwt = _jwtSecurity.Generar(usuarioEntity, jti, expiration);
                         

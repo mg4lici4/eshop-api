@@ -13,7 +13,7 @@ namespace EShop.Infraestructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PersonaEntity>(entity =>
+            modelBuilder.Entity<PersonaEntity>(static entity =>
             {
                 entity.ToTable("PERSONA");
                 entity.HasKey(e => e.IdPersona);
@@ -44,9 +44,11 @@ namespace EShop.Infraestructure.Persistence
 
                 entity.Property(e => e.FechaCreacion)
                     .HasColumnName("FECHA_CREACION")
+                    .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                     .HasDefaultValueSql("SYSDATE");
 
                 entity.Property(e => e.FechaActualizacion)
+                    .HasConversion(v => v, v => DateTime.SpecifyKind((DateTime)v!, DateTimeKind.Utc))
                     .HasColumnName("FECHA_ACTUALIZACION");
 
                 entity.HasIndex(e => e.Correo)
@@ -90,9 +92,11 @@ namespace EShop.Infraestructure.Persistence
 
                 entity.Property(e => e.FechaCreacion)
                     .HasColumnName("FECHA_CREACION")
+                    .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                     .HasDefaultValueSql("SYSDATE");
 
                 entity.Property(e => e.FechaActualizacion)
+                .HasConversion(v => v, v => DateTime.SpecifyKind((DateTime)v!, DateTimeKind.Utc))
                     .HasColumnName("FECHA_ACTUALIZACION");
 
                 entity.Property(e => e.FechaBloqueo)
@@ -126,9 +130,11 @@ namespace EShop.Infraestructure.Persistence
 
                 entity.Property(e => e.FechaCreacion)
                     .HasColumnName("FECHA_CREACION")
+                    .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                     .HasDefaultValueSql("SYSDATE");
 
                 entity.Property(e => e.FechaActualizacion)
+                .HasConversion(v => v, v => DateTime.SpecifyKind((DateTime)v!, DateTimeKind.Utc))
                     .HasColumnName("FECHA_ACTUALIZACION");
             });
 
@@ -156,12 +162,15 @@ namespace EShop.Infraestructure.Persistence
 
                 entity.Property(e => e.FechaCreacion)
                     .HasColumnName("FECHA_CREACION")
+                    .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                     .HasDefaultValueSql("SYSDATE");
 
                 entity.Property(e => e.FechaExpiracion)
+                    .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                     .HasColumnName("FECHA_EXPIRACION");
 
                 entity.Property(e => e.FechaActualizacion)
+                    .HasConversion(v => v, v => DateTime.SpecifyKind((DateTime)v!, DateTimeKind.Utc))
                     .HasColumnName("FECHA_ACTUALIZACION");
 
                 entity.HasIndex(e => e.Jti)
@@ -195,9 +204,11 @@ namespace EShop.Infraestructure.Persistence
 
                 entity.Property(e => e.FechaCreacion)
                     .HasColumnName("FECHA_CREACION")
+                    .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                     .HasDefaultValueSql("SYSDATE");
 
                 entity.Property(e => e.FechaActualizacion)
+                .HasConversion(v => v, v => DateTime.SpecifyKind((DateTime)v!, DateTimeKind.Utc))
                     .HasColumnName("FECHA_ACTUALIZACION");
             });
         }
