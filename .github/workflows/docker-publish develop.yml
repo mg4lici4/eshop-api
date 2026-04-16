@@ -3,7 +3,7 @@ name: Publish API to Docker Hub
 on:
   push:
     branches:
-      - main   # Se ejecuta al hacer push a main
+      - develop
 
 jobs:
   build:
@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eshop-api:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/eshop-api:preview
