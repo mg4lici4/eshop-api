@@ -19,6 +19,13 @@ namespace EShop.Infraestructure.Repositories
             return sesionEntity!;
         }
 
+        public async Task<bool> ExisteSesionActivaPorIdUsuarioAsync(long idUsuario)
+        {
+            return await _eShopDbContext.Sesiones
+                    .AsNoTracking()
+                    .CountAsync(s => s.IdUsuario == idUsuario && s.Activo == 1) > 0;
+        }
+
         public async Task<SesionEntity> BuscarPorJtiAsync(string jti)
         {
             var sesionEntity = await _eShopDbContext.Sesiones.AsNoTracking().FirstOrDefaultAsync(s => s.Jti == jti);

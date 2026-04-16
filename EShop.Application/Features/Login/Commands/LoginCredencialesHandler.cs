@@ -35,24 +35,23 @@ namespace EShop.Application.Features.Login.Commands
                 
                 if (credencialesValidas)
                 {
-                    var sesionActual = await _sesionRepository.BuscarPorIdUsuarioAsync(usuarioEntity.IdUsuario);
-                    if(sesionActual is null || sesionActual?.Activo == 0)
+                    var existeSesionActiva = await _sesionRepository.ExisteSesionActivaPorIdUsuarioAsync(usuarioEntity.IdUsuario);
+                    if(existeSesionActiva)
+                        return Result<ResponseModelDto>.Failure(new ResponseModelDto("Se encuentra una sesion activa."), System.Net.HttpStatusCode.BadRequest);
+
+                    var expiration = FechaHelper.ActualUTC(_jwtSettings.VigenciaEnMinutos);
+                    var jti = Guid.NewGuid().ToString();
+                    var jwt = _jwtSecurity.Generar(usuarioEntity, jti, expiration);
+
+                    var sesionEntity = new SesionEntity()
                     {
-                        var expiration = FechaHelper.ActualUTC(_jwtSettings.VigenciaEnMinutos);
-                        var jti = Guid.NewGuid().ToString();
-                        var jwt = _jwtSecurity.Generar(usuarioEntity, jti, expiration);
-                        
-                        var sesionEntity = new SesionEntity()
-                        {
-                            Activo = 1,
-                            IdUsuario = usuarioEntity.IdUsuario,
-                            Jti = jti,
-                            FechaExpiracion = expiration
-                        };
-                        await _sesionRepository.RegistrarAsync(sesionEntity);
-                        return Result<ResponseModelDto>.Success(new ResponseModelDto(datos: jwt));
-                    }
-                    return Result<ResponseModelDto>.Failure(new ResponseModelDto("Se encuentra una sesion activa."), System.Net.HttpStatusCode.BadRequest);
+                        Activo = 1,
+                        IdUsuario = usuarioEntity.IdUsuario,
+                        Jti = jti,
+                        FechaExpiracion = expiration
+                    };
+                    await _sesionRepository.RegistrarAsync(sesionEntity);
+                    return Result<ResponseModelDto>.Success(new ResponseModelDto(datos: jwt));
                 }
                 return Result<ResponseModelDto>.Failure(null!, System.Net.HttpStatusCode.Forbidden);
             }
