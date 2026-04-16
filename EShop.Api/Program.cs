@@ -4,7 +4,7 @@ using EShop.Infraestructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JWTSettings"));
+builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("EShop:Api:JWTSettings"));
 
 // Add services to the container.
 builder.Services.AddInfraestructureServices(builder.Configuration);

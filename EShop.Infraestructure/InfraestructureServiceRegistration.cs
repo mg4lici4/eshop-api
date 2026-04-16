@@ -11,10 +11,11 @@ namespace EShop.Infraestructure
 {
     public static class InfraestructureServiceRegistration
     {
+        const string ESHOP_BD = "EShop_API";
         public static IServiceCollection AddInfraestructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<EShopDbContext>(options =>
-            options.UseOracle(configuration.GetConnectionString("EShop")));
+                options.UseOracle(configuration.GetConnectionString(ESHOP_BD)));
 
             // 🔧 Configuración de Kafka (puedes moverlo a appsettings.json)
             string bootstrapServers = "localhost:9093";
