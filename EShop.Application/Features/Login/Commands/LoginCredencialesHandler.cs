@@ -45,7 +45,6 @@ namespace EShop.Application.Features.Login.Commands
 
                     var sesionEntity = new SesionEntity()
                     {
-                        Activo = 1,
                         IdUsuario = usuarioEntity.IdUsuario,
                         Jti = jti,
                         FechaExpiracion = expiration

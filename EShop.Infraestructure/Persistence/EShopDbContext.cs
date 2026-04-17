@@ -156,8 +156,8 @@ namespace EShop.Infraestructure.Persistence
                     .HasMaxLength(200)
                     .IsRequired();
 
-                entity.Property(e => e.Activo)
-                    .HasColumnName("ACTIVO")
+                entity.Property(e => e.Estado)
+                    .HasColumnName("ESTADO")
                     .IsRequired();
 
                 entity.Property(e => e.FechaCreacion)

@@ -23,7 +23,7 @@ namespace EShop.Infraestructure.Repositories
         {
             return await _eShopDbContext.Sesiones
                     .AsNoTracking()
-                    .CountAsync(s => s.IdUsuario == idUsuario && s.Activo == 1) > 0;
+                    .CountAsync(s => s.IdUsuario == idUsuario && s.Estado == 1) > 0;
         }
 
         public async Task<SesionEntity> BuscarPorJtiAsync(string jti)
