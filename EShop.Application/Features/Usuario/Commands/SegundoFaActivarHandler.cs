@@ -14,11 +14,10 @@ namespace EShop.Application.Features.Usuario.Commands
         }
         public async Task<Result<ResponseModelDto>> Handle(SegundoFaActivarCommand request, CancellationToken cancellationToken)
         {
-            var segundoFAEntities = await _segundoFARepository.ObtenerTodosPorIdUsuario(request.ActivarSegundoFaDto.IdUsuario);
+            var segundoFAEntity = await _segundoFARepository.BuscarPorIdUsuario(request.ActivarSegundoFaDto.IdUsuario);
 
-            if (segundoFAEntities.Any())
+            if (segundoFAEntity is not null)
             {
-                var segundoFAEntity = segundoFAEntities.First();
                 var secretBytes = OtpNet.Base32Encoding.ToBytes(segundoFAEntity.Contrasenia);
 
                 var totp = new OtpNet.Totp(secretBytes, step: 30, mode: OtpNet.OtpHashMode.Sha512);

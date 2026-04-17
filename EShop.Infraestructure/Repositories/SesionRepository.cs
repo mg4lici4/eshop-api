@@ -1,4 +1,5 @@
-﻿using EShop.Application.Interfaces.Repositories;
+﻿using EShop.Application.Helpers;
+using EShop.Application.Interfaces.Repositories;
 using EShop.Domain.Entities;
 using EShop.Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,14 @@ namespace EShop.Infraestructure.Repositories
             return sesionEntity!;
         }
 
+        public async Task<bool> ActualizarAsync(SesionEntity sesionEntity)
+        {
+            sesionEntity.FechaActualizacion = FechaHelper.ActualUTC();
+
+            _eShopDbContext.Sesiones.Entry(sesionEntity).State = EntityState.Modified;
+            var result = await _eShopDbContext.SaveChangesAsync();
+            return result > 0;
+        }
         public async Task<bool> RegistrarAsync(SesionEntity sesionEntity)
         {
             await _eShopDbContext.Sesiones.AddAsync(sesionEntity);

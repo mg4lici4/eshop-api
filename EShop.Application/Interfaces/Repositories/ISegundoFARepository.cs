@@ -6,7 +6,6 @@ namespace EShop.Application.Interfaces.Repositories
     {
         Task<bool> RegistrarAsync(SegundoFAEntity segundoFAEntity);
         Task<bool> ActualizarAsync(SegundoFAEntity segundoFAEntity);
-        Task<SegundoFAEntity> BuscarPorIdUsuario(long idUsuario);
-        Task<IEnumerable<SegundoFAEntity>> ObtenerTodosPorIdUsuario(long idUsuario);
+        Task<SegundoFAEntity?> BuscarPorIdUsuario(long idUsuario);
     }
 }
