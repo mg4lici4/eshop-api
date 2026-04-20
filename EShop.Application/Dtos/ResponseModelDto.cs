@@ -1,27 +1,28 @@
-﻿using System.Text.Json.Serialization;
+﻿using EShop.Application.Helpers;
+using System.Text.Json.Serialization;
 
 namespace EShop.Application.Dtos
 {
     public class ResponseModelDto
     {
         public object Datos { get; set; }
-        public string Mensage { get; set; } = string.Empty;
+        public string Mensaje { get; set; } = string.Empty;
 
         [JsonConstructor]
-        public ResponseModelDto(object datos, string mensage)
+        public ResponseModelDto(object datos, string mensaje)
         {
             Datos = datos;
-            Mensage = mensage;
+            Mensaje = mensaje;
         }
 
         public ResponseModelDto(object datos)
         {
             Datos = datos;
-            Mensage = "Operación correcta.";
+            Mensaje = MensajesHelper.OPERACION_CORRECTA;
         }
         public ResponseModelDto(string mensaje)
         {
-            Mensage = mensaje;
+            Mensaje = mensaje;
             Datos = null!;
         }
     }

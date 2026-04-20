@@ -24,7 +24,7 @@ namespace EShop.Application.Features.Sesion.Commands
             {
                 sesionEntity.Estado = 3;
                 await _sesionRepository.ActualizarAsync(sesionEntity);
-                return Result<ResponseModelDto>.Success(new ResponseModelDto(mensaje: MensajesHelper.OK));
+                return Result<ResponseModelDto>.Success(new ResponseModelDto(mensaje: MensajesHelper.OPERACION_CORRECTA));
             }
 
             return Result<ResponseModelDto>.Failure(new ResponseModelDto(mensaje: MensajesHelper.ERROR_SESION_CAMBIAR_ESTADO));

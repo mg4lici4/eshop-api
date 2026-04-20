@@ -23,7 +23,7 @@ namespace EShop.Application.Features.Usuario.Commands
                 {
                     usuarioEntity.Activo = 1;
                     await _usuarioRepository.ActualizarAsync(usuarioEntity);
-                    return Result<ResponseModelDto>.Success(new ResponseModelDto(MensajesHelper.OK));
+                    return Result<ResponseModelDto>.Success(new ResponseModelDto(MensajesHelper.OPERACION_CORRECTA));
                 }
 
                 return Result<ResponseModelDto>.Failure(new ResponseModelDto("Usuario no encontrado"), System.Net.HttpStatusCode.NoContent);
