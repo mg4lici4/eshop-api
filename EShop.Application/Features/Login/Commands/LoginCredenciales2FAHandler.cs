@@ -17,7 +17,7 @@ namespace EShop.Application.Features.Login.Commands
         }
         public async Task<Result<ResponseModelDto>> Handle(LoginCredenciales2FACommand request, CancellationToken cancellationToken)
         {
-            SesionEntity sesionEntity = await _sesionRepository.BuscarPorJtiAsync(request.LoginCredenciales2FADto.Jti);
+            SesionEntity? sesionEntity = await _sesionRepository.BuscarPorJtiAsync(request.LoginCredenciales2FADto.Jti);
             SegundoFAEntity? segundoFAEntity = await _segundoFARepository.BuscarPorIdUsuario(sesionEntity.IdUsuario);
 
             if (sesionEntity is not null)

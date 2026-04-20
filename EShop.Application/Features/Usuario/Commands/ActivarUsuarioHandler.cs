@@ -1,5 +1,6 @@
 ﻿using EShop.Application.Common;
 using EShop.Application.Dtos;
+using EShop.Application.Helpers;
 using EShop.Application.Interfaces.Repositories;
 using MediatR;
 
@@ -22,7 +23,7 @@ namespace EShop.Application.Features.Usuario.Commands
                 {
                     usuarioEntity.Activo = 1;
                     await _usuarioRepository.ActualizarAsync(usuarioEntity);
-                    return Result<ResponseModelDto>.Success(new ResponseModelDto("Usuario activado."));
+                    return Result<ResponseModelDto>.Success(new ResponseModelDto(MensajesHelper.OK));
                 }
 
                 return Result<ResponseModelDto>.Failure(new ResponseModelDto("Usuario no encontrado"), System.Net.HttpStatusCode.NoContent);

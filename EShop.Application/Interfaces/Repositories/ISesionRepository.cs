@@ -7,7 +7,7 @@ namespace EShop.Application.Interfaces.Repositories
         Task<bool> RegistrarAsync(SesionEntity sesionEntity);
         Task<bool> ActualizarAsync(SesionEntity sesionEntity);
         Task<SesionEntity> BuscarPorIdUsuarioAsync(long idUsuario);
-        Task<SesionEntity> BuscarPorJtiAsync(string jti);
+        Task<SesionEntity?> BuscarPorJtiAsync(string jti);
         Task<bool> ExisteSesionActivaPorIdUsuarioAsync(long idUsuario);
     }
 }
